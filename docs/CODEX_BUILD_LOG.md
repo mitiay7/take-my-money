@@ -21,4 +21,6 @@
 
 ## Milestone log
 
-- Milestone 0 started: repository rules, live plan, dependency selection, and official documentation review.
+- Milestone 0 completed: repository rules, live plan, exact dependencies, official documentation review, responsive application shell, CI, local PostgreSQL, and security headers.
+- Rejected TypeScript 7 and ESLint 10 after peer checks showed incompatibility with the current Next.js lint stack; pinned the latest supported releases.
+- Milestone 0 checks passed: formatting, strict typecheck, ESLint with zero warnings, Vitest, and the Next.js production build.

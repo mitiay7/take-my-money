@@ -1,0 +1,8 @@
+SPEC.md
+Take My Money Project.pdf
+.next/
+coverage/
+node_modules/
+playwright-report/
+test-results/
+tmp/

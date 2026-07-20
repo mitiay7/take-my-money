@@ -20,7 +20,7 @@ Last updated: 2026-07-20
 
 ## Milestones
 
-- [ ] Milestone 0 - repository, planning, scaffold, CI, environment
+- [x] Milestone 0 - repository, planning, scaffold, CI, environment
 - [ ] Milestone 1 - deterministic billing core, eligibility, state machine, tests
 - [ ] Milestone 2 - PostgreSQL schema, migrations, seed, repositories, integration tests
 - [ ] Milestone 3 - sandbox providers, saga, idempotency, concurrency, reconciliation
@@ -31,12 +31,12 @@ Last updated: 2026-07-20
 
 ## Live quality gate
 
-- [ ] `pnpm format:check`
-- [ ] `pnpm typecheck`
-- [ ] `pnpm lint`
-- [ ] `pnpm test`
+- [x] `pnpm format:check`
+- [x] `pnpm typecheck`
+- [x] `pnpm lint`
+- [x] `pnpm test`
 - [ ] `pnpm test:e2e`
-- [ ] `pnpm build`
+- [x] `pnpm build`
 - [ ] Desktop visual QA
 - [ ] 390 px mobile visual QA
 - [ ] Public URL checked from a clean session
