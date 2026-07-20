@@ -7,7 +7,7 @@
 
 Take my money is a subscription-portability sandbox for the OpenAI Build Week Challenge. It converts the unused value of an active mobile-billed subscription into a controlled, one-time credit toward a new direct plan.
 
-**Public demo:** deployment pending final Vercel verification
+**Public demo:** https://take-my-money-psi.vercel.app
 
 **Source:** https://github.com/mitiay7/take-my-money
 

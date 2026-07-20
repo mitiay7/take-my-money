@@ -26,15 +26,15 @@
 - [x] Short/long descriptions and demo-video script.
 - [x] Codex build log and final `/feedback` placeholder.
 - [x] Final desktop and mobile screenshots committed.
-- [ ] Public demo URL added to README and submission copy.
+- [x] Public demo URL added to README and submission copy.
 - [ ] Demo video recorded and uploaded.
 
 ## Release
 
 - [x] Public GitHub repository on `main`.
-- [ ] Managed PostgreSQL provisioned; migrations and seed applied.
-- [ ] Vercel production variables configured; no secret exposed.
+- [x] Managed PostgreSQL provisioned; migrations and seed applied.
+- [x] Vercel production variables configured; no secret exposed.
 - [ ] Live GPT-5.6 path verified with a project API key.
-- [ ] Public deployment tested from clean/incognito desktop and mobile sessions.
-- [ ] GitHub Actions green at final commit.
+- [x] Public deployment tested from clean desktop and mobile sessions.
+- [x] GitHub Actions green at release commit.
 - [ ] Contest form submitted and `/feedback` Session ID recorded.

@@ -1,5 +1,9 @@
 # Submission assets
 
+**Public demo:** https://take-my-money-psi.vercel.app
+
+**Source:** https://github.com/mitiay7/take-my-money
+
 ## Short description
 
 Take my money turns unused time on a mobile-billed subscription into a safe, one-time credit for a new direct plan. GPT-5.6 reads synthetic receipt evidence and explains verified facts; deterministic code controls every financial and state-changing decision.

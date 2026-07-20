@@ -5,7 +5,7 @@
   "description": "Subscription portability sandbox for the OpenAI Build Week Challenge.",
   "license": "MIT",
   "engines": {
-    "node": ">=22.0.0"
+    "node": "22.x"
   },
   "packageManager": "pnpm@11.15.1",
   "scripts": {

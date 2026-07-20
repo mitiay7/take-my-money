@@ -27,7 +27,7 @@ Last updated: 2026-07-20
 - [x] Milestone 4 - complete responsive consumer flow
 - [x] Milestone 5 - GPT-5.6 receipt extraction, explanation, grounding, fallback
 - [x] Milestone 6 - system view and complete documentation
-- [ ] Milestone 7 - E2E, accessibility, polish, deployment, external verification
+- [x] Milestone 7 - E2E, accessibility, polish, deployment, external verification
 
 ## Live quality gate
 
@@ -39,4 +39,4 @@ Last updated: 2026-07-20
 - [x] `pnpm build`
 - [x] Desktop visual QA
 - [x] 390 px mobile visual QA
-- [ ] Public URL checked from a clean session
+- [x] Public URL checked from a clean session
