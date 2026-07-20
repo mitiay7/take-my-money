@@ -350,7 +350,6 @@ export function RebaseDemo() {
                 title="Choose synthetic source evidence"
                 copy="Built-in receipt images are safe demo fixtures. Arbitrary uploads are disabled."
               />
-              {receiptAi && <AiMode status={receiptAi} purpose="Receipt extraction" />}
               <div
                 className="scenario-grid"
                 role="radiogroup"
@@ -409,6 +408,7 @@ export function RebaseDemo() {
                 title="Evidence extracted"
                 copy="AI extraction helps locate the subscription. It does not approve a credit."
               />
+              {receiptAi && <AiMode status={receiptAi} purpose="Receipt extraction" />}
               <dl className="fact-grid">
                 <Fact label="Product" value={extraction.productName ?? "Not found"} />
                 <Fact label="Amount" value={extraction.amountText ?? "Not found"} />

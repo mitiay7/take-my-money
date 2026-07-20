@@ -36,3 +36,5 @@
 - Axe found invalid description-list markup in the technical view; corrected the semantic containers and verified the complete flow at desktop and mobile widths.
 - Milestone 5 completed: GPT-5.6 Responses API vision extraction, Zod Structured Outputs, grounded quote explanations, hashed safety identifiers, no-store requests, bounded retry/timeout, database-enforced usage limits, and honest deterministic fallback states.
 - Mocked Responses tests verify base64 image input, structured-output configuration, usage capture, and rejection of invented financial values. Pure grounding tests reject unsupported amounts, durations, percentages, and lookup references.
+- Milestone 6 completed: consumer/system documentation set, architecture and saga diagrams, billing proof, AI boundary, threat model, production integration plan, testing guide, submission copy, video plan, and final screenshot assets.
+- Browser visual QA found an AI-status badge mounted in the previous step and mobile summary ordered before the task content; both were corrected. Desktop, 390 px mobile, result, and system-audit views were inspected with no browser console errors.

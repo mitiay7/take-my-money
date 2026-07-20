@@ -1505,7 +1505,7 @@ button {
 
   .demo-summary {
     position: static;
-    grid-row: 1;
+    grid-row: auto;
   }
 
   .scenario-grid,
