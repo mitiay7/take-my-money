@@ -100,6 +100,12 @@ importers:
 
   packages/provider-contracts: {}
 
+  packages/shared-contracts:
+    dependencies:
+      zod:
+        specifier: 4.4.3
+        version: 4.4.3
+
 packages:
   "@adobe/css-tools@4.5.0":
     resolution:

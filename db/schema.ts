@@ -149,7 +149,7 @@ export const rebaseQuotes = pgTable(
   (table) => [
     uniqueIndex("rebase_quotes_public_id_unique").on(table.publicId),
     uniqueIndex("rebase_quotes_operation_unique").on(table.operationId),
-    uniqueIndex("rebase_quotes_fingerprint_unique").on(table.quoteFingerprint),
+    index("rebase_quotes_fingerprint_idx").on(table.quoteFingerprint),
     check(
       "rebase_quotes_amounts_non_negative",
       sql`

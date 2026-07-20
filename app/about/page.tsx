@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, CheckCircle2, ShieldCheck } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, ShieldCheck } from "lucide-react";
 
 export const metadata: Metadata = { title: "How it works" };
 
@@ -35,6 +35,9 @@ export default function AboutPage() {
           </p>
         </section>
       </div>
+      <Link className="button button-primary about-cta" href="/demo">
+        Try the migration demo <ArrowRight size={17} aria-hidden="true" />
+      </Link>
     </div>
   );
 }

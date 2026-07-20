@@ -101,6 +101,40 @@ export class RebaseService {
     return operation;
   }
 
+  async recordReceiptExtracted(input: {
+    demoSessionId: string;
+    operationPublicId: string;
+    requestId: string;
+    extractionMode: "LIVE" | "FALLBACK";
+  }): Promise<RebaseOperationRow> {
+    const repository = new OperationRepository(this.database);
+    const operation = await repository.findOwned(input.operationPublicId, input.demoSessionId);
+    if (!operation) throw new ApplicationError("OPERATION_NOT_FOUND", "Operation not found", 404);
+    if (operation.status === "RECEIPT_EXTRACTED") return operation;
+    if (operation.status !== "DRAFT") {
+      throw new ApplicationError(
+        "OPERATION_NOT_CONFIRMABLE",
+        "Receipt cannot be extracted from the current state",
+        409,
+      );
+    }
+    await new AuditRepository(this.database).append({
+      operationId: operation.id,
+      demoSessionId: operation.demoSessionId,
+      eventType: "RECEIPT_EXTRACTION_REQUESTED",
+      actorType: "USER",
+      requestId: input.requestId,
+      metadata: { mode: input.extractionMode },
+    });
+    return this.transitionOperation(
+      operation,
+      "RECEIPT_EXTRACTED",
+      "RECEIPT_EXTRACTION_SUCCEEDED",
+      input.requestId,
+      { riskFlags: operation.riskFlags },
+    );
+  }
+
   async verifySource(input: {
     demoSessionId: string;
     operationPublicId: string;

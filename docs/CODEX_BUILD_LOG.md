@@ -31,3 +31,6 @@
 - Milestone 3 completed: source and target provider contracts, nine required synthetic scenarios, stable privacy-preserving fingerprints, saga reservations, external idempotency, definite-failure compensation, retry, unknown-result reconciliation, and source-consumption locking.
 - Integration suite now proves same-key replay, mismatched-payload conflict, exactly-one concurrent confirmation, same-key retry after definite failure, reconciliation completion, quote expiry, quote fingerprint protection, and deterministic blocked/manual-review states.
 - PostgreSQL timestamp strings exposed a format boundary mismatch; fixed by normalizing `timestamptz` values to ISO UTC before calling the strict domain core.
+- Milestone 4 completed: signed anonymous sessions, CSRF-protected JSON API, receipt-to-result consumer flow, blocked/manual decisions, consent, result sharing, and sanitized technical audit.
+- Parallel desktop/mobile E2E exposed an invalid global unique constraint on deterministic quote fingerprints; fingerprints are now indexed but may repeat across independent operations.
+- Axe found invalid description-list markup in the technical view; corrected the semantic containers and verified the complete flow at desktop and mobile widths.

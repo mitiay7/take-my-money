@@ -15,6 +15,13 @@
       "when": 1784527802218,
       "tag": "0001_slow_selene",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1784529120417,
+      "tag": "0002_low_namor",
+      "breakpoints": true
     }
   ]
 }

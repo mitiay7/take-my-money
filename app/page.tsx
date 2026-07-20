@@ -40,8 +40,8 @@ export default function HomePage() {
               credit for a new direct plan.
             </p>
             <div className="hero-actions">
-              <Link className="button button-primary" href="/about">
-                Explore the protocol <ArrowRight size={18} aria-hidden="true" />
+              <Link className="button button-primary" href="/demo">
+                Try the migration demo <ArrowRight size={18} aria-hidden="true" />
               </Link>
               <a className="text-link" href="#protocol">
                 See the three steps
