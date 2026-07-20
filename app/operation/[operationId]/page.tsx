@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { ArrowRight, CheckCircle2, Clock3 } from "lucide-react";
 import { getOperationView } from "@/lib/application/operation-query";
-import { csrfTokenFor, requireSession } from "@/lib/auth/session";
+import { csrfTokenFor, readSession } from "@/lib/auth/session";
 import { getDatabase } from "@/lib/db/client";
 import { ResultActions } from "@/components/operation/result-actions";
 
@@ -15,7 +15,8 @@ export default async function OperationPage({
 }: {
   params: Promise<{ operationId: string }>;
 }) {
-  const session = await requireSession();
+  const session = await readSession();
+  if (!session) redirect("/demo");
   const { operationId } = await params;
   let view;
   try {

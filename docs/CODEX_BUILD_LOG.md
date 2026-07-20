@@ -39,6 +39,6 @@
 - Milestone 6 completed: consumer/system documentation set, architecture and saga diagrams, billing proof, AI boundary, threat model, production integration plan, testing guide, submission copy, video plan, and final screenshot assets.
 - Browser visual QA found an AI-status badge mounted in the previous step and mobile summary ordered before the task content; both were corrected. Desktop, 390 px mobile, result, and system-audit views were inspected with no browser console errors.
 - Milestone 7 completed: Neon PostgreSQL provisioned in Frankfurt, migrations and seed applied, Vercel functions deployed in `fra1`, production health confirmed, and the public flow verified on desktop and mobile.
-- The production release passed all 57 Vitest checks, all 6 remote Playwright checks, Axe scans, a clean visual browser pass, and GitHub Actions.
+- The production release passed all 57 Vitest checks, all 8 desktop/mobile Playwright checks, Axe scans, a clean visual browser pass, and GitHub Actions.
 - Public demo: https://take-my-money-psi.vercel.app
 - Live GPT-5.6 activation remains a deployer-owned release step because no `OPENAI_API_KEY` was available; production exposes the explicit deterministic fallback until that server-side secret is configured.

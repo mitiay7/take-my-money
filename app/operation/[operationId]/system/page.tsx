@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound, redirect } from "next/navigation";
 import { ArrowLeft, Braces, Database, Fingerprint, GitCommitHorizontal } from "lucide-react";
 import { getSystemView } from "@/lib/application/operation-query";
-import { requireSession } from "@/lib/auth/session";
+import { readSession } from "@/lib/auth/session";
 import { getDatabase } from "@/lib/db/client";
 import { SystemJsonDownload } from "@/components/system/json-download";
 
@@ -10,9 +11,15 @@ export const metadata: Metadata = { title: "System audit" };
 export const dynamic = "force-dynamic";
 
 export default async function SystemPage({ params }: { params: Promise<{ operationId: string }> }) {
-  const session = await requireSession();
+  const session = await readSession();
+  if (!session) redirect("/demo");
   const { operationId } = await params;
-  const view = await getSystemView(getDatabase(), session.id, operationId);
+  let view;
+  try {
+    view = await getSystemView(getDatabase(), session.id, operationId);
+  } catch {
+    notFound();
+  }
 
   return (
     <div className="system-page shell">
