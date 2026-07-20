@@ -67,7 +67,11 @@ export default function HomePage() {
               <span>Simulated due now</span>
               <strong>€213.68</strong>
             </div>
-            <div className="timeline-mini" aria-label="19 of 31 subscription days remain">
+            <div
+              className="timeline-mini"
+              role="img"
+              aria-label="19 of 31 subscription days remain"
+            >
               <span className="used" />
               <span className="remaining" />
             </div>

@@ -21,7 +21,7 @@ Last updated: 2026-07-20
 ## Milestones
 
 - [x] Milestone 0 - repository, planning, scaffold, CI, environment
-- [ ] Milestone 1 - deterministic billing core, eligibility, state machine, tests
+- [x] Milestone 1 - deterministic billing core, eligibility, state machine, tests
 - [ ] Milestone 2 - PostgreSQL schema, migrations, seed, repositories, integration tests
 - [ ] Milestone 3 - sandbox providers, saga, idempotency, concurrency, reconciliation
 - [ ] Milestone 4 - complete responsive consumer flow
@@ -35,7 +35,7 @@ Last updated: 2026-07-20
 - [x] `pnpm typecheck`
 - [x] `pnpm lint`
 - [x] `pnpm test`
-- [ ] `pnpm test:e2e`
+- [x] `pnpm test:e2e`
 - [x] `pnpm build`
 - [ ] Desktop visual QA
 - [ ] 390 px mobile visual QA

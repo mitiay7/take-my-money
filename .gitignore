@@ -25,6 +25,7 @@ test-results/
 
 # generated temporary files
 tmp/
+*.tsbuildinfo
 
 # logs
 *.log

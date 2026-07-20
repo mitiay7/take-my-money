@@ -24,3 +24,5 @@
 - Milestone 0 completed: repository rules, live plan, exact dependencies, official documentation review, responsive application shell, CI, local PostgreSQL, and security headers.
 - Rejected TypeScript 7 and ESLint 10 after peer checks showed incompatibility with the current Next.js lint stack; pinned the latest supported releases.
 - Milestone 0 checks passed: formatting, strict typecheck, ESLint with zero warnings, Vitest, and the Next.js production build.
+- Milestone 1 completed: isolated bigint billing core, UTC rational proration, HALF_UP rounding, policy controls, eligibility engine, state machine, bigint serialization, and 35 domain tests.
+- Playwright accessibility smoke test found and fixed an invalid ARIA label on the example timeline.
