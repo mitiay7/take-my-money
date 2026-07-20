@@ -1,6 +1,9 @@
 import react from "@vitejs/plugin-react";
+import dotenv from "dotenv";
 import { defineConfig } from "vitest/config";
 import { fileURLToPath } from "node:url";
+
+dotenv.config({ path: ".env.local", quiet: true });
 
 export default defineConfig({
   plugins: [react()],

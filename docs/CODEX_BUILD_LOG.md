@@ -26,3 +26,5 @@
 - Milestone 0 checks passed: formatting, strict typecheck, ESLint with zero warnings, Vitest, and the Next.js production build.
 - Milestone 1 completed: isolated bigint billing core, UTC rational proration, HALF_UP rounding, policy controls, eligibility engine, state machine, bigint serialization, and 35 domain tests.
 - Playwright accessibility smoke test found and fixed an invalid ARIA label on the example timeline.
+- Milestone 2 completed: 10-table PostgreSQL schema, committed Drizzle migration, idempotent target-plan seed, session/source/operation/quote/ledger/audit/idempotency repositories, and real-PostgreSQL integration tests.
+- Database migration and seed were applied twice successfully; repository suite verifies ownership isolation, optimistic state versions, immutable quotes, append-only ledger uniqueness, ordered audits, and idempotency replay storage.
