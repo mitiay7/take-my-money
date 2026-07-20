@@ -23,7 +23,7 @@ Last updated: 2026-07-20
 - [x] Milestone 0 - repository, planning, scaffold, CI, environment
 - [x] Milestone 1 - deterministic billing core, eligibility, state machine, tests
 - [x] Milestone 2 - PostgreSQL schema, migrations, seed, repositories, integration tests
-- [ ] Milestone 3 - sandbox providers, saga, idempotency, concurrency, reconciliation
+- [x] Milestone 3 - sandbox providers, saga, idempotency, concurrency, reconciliation
 - [ ] Milestone 4 - complete responsive consumer flow
 - [ ] Milestone 5 - GPT-5.6 receipt extraction, explanation, grounding, fallback
 - [ ] Milestone 6 - system view and complete documentation

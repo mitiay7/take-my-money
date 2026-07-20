@@ -152,7 +152,7 @@ describe("PostgreSQL repositories", () => {
     const input = {
       operationId: operation.id,
       demoSessionId: session.id,
-      entryType: "MIGRATION_CREDIT_RESERVED",
+      entryType: "MIGRATION_CREDIT_ISSUED",
       amountMinor: 1532n,
       currency: "EUR",
       metadata: { quote: "qt_test" },

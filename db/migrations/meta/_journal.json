@@ -8,6 +8,13 @@
       "when": 1784527138939,
       "tag": "0000_wet_peter_parker",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1784527802218,
+      "tag": "0001_slow_selene",
+      "breakpoints": true
     }
   ]
 }

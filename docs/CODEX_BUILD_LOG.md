@@ -28,3 +28,6 @@
 - Playwright accessibility smoke test found and fixed an invalid ARIA label on the example timeline.
 - Milestone 2 completed: 10-table PostgreSQL schema, committed Drizzle migration, idempotent target-plan seed, session/source/operation/quote/ledger/audit/idempotency repositories, and real-PostgreSQL integration tests.
 - Database migration and seed were applied twice successfully; repository suite verifies ownership isolation, optimistic state versions, immutable quotes, append-only ledger uniqueness, ordered audits, and idempotency replay storage.
+- Milestone 3 completed: source and target provider contracts, nine required synthetic scenarios, stable privacy-preserving fingerprints, saga reservations, external idempotency, definite-failure compensation, retry, unknown-result reconciliation, and source-consumption locking.
+- Integration suite now proves same-key replay, mismatched-payload conflict, exactly-one concurrent confirmation, same-key retry after definite failure, reconciliation completion, quote expiry, quote fingerprint protection, and deterministic blocked/manual-review states.
+- PostgreSQL timestamp strings exposed a format boundary mismatch; fixed by normalizing `timestamptz` values to ISO UTC before calling the strict domain core.

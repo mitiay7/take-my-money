@@ -186,10 +186,11 @@ export const creditLedgerEntries = pgTable(
   },
   (table) => [
     index("credit_ledger_entries_operation_idx").on(table.operationId, table.createdAt),
-    uniqueIndex("credit_ledger_entries_operation_type_unique").on(
-      table.operationId,
-      table.entryType,
-    ),
+    uniqueIndex("credit_ledger_entries_committed_type_unique")
+      .on(table.operationId, table.entryType)
+      .where(
+        sql`${table.entryType} in ('MIGRATION_CREDIT_ISSUED', 'MIGRATION_CREDIT_APPLIED', 'MIGRATION_CREDIT_CARRIED_FORWARD')`,
+      ),
   ],
 );
 

@@ -13,9 +13,13 @@ export default defineConfig({
       "@take-my-money/billing-core": fileURLToPath(
         new URL("./packages/billing-core/src/index.ts", import.meta.url),
       ),
+      "@take-my-money/provider-contracts": fileURLToPath(
+        new URL("./packages/provider-contracts/src/index.ts", import.meta.url),
+      ),
     },
   },
   test: {
+    fileParallelism: false,
     environment: "jsdom",
     setupFiles: ["./tests/setup.ts"],
     include: ["**/*.test.{ts,tsx}"],

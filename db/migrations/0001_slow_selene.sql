@@ -1,0 +1,2 @@
+DROP INDEX "credit_ledger_entries_operation_type_unique";--> statement-breakpoint
+CREATE UNIQUE INDEX "credit_ledger_entries_committed_type_unique" ON "credit_ledger_entries" USING btree ("operation_id","entry_type") WHERE "credit_ledger_entries"."entry_type" in ('MIGRATION_CREDIT_ISSUED', 'MIGRATION_CREDIT_APPLIED', 'MIGRATION_CREDIT_CARRIED_FORWARD');

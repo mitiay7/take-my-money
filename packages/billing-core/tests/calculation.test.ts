@@ -27,6 +27,8 @@ describe("calculateRebase", () => {
 
     expect(result.periodDurationMs).toBe(2_678_400_000n);
     expect(result.remainingDurationMs).toBe(1_641_600_000n);
+    expect(result.unusedRatioNumerator).toBe(19n);
+    expect(result.unusedRatioDenominator).toBe(31n);
     expect(result.migrationCreditMinor).toBe(1532n);
     expect(result.amountDueMinor).toBe(21_368n);
     expect(result.carryForwardMinor).toBe(0n);

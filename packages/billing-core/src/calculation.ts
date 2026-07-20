@@ -131,14 +131,15 @@ export function calculateRebase(input: CalculationInput): RebaseCalculation {
   const creditAppliedMinor = minBigInt(migrationCreditMinor, input.targetPlan.priceMinor);
   const amountDueMinor = input.targetPlan.priceMinor - creditAppliedMinor;
   const carryForwardMinor = migrationCreditMinor - creditAppliedMinor;
+  const ratioDivisor = greatestCommonDivisor(remainingDurationMs, periodDurationMs);
 
   const result: RebaseCalculation = {
     algorithmVersion: BILLING_ALGORITHM_VERSION,
     evaluationTimeUtc: input.evaluationTimeUtc,
     periodDurationMs,
     remainingDurationMs,
-    unusedRatioNumerator: remainingDurationMs,
-    unusedRatioDenominator: periodDurationMs,
+    unusedRatioNumerator: remainingDurationMs / ratioDivisor,
+    unusedRatioDenominator: periodDurationMs / ratioDivisor,
     sourceValueMinor,
     reimbursementRateBps: input.policy.reimbursementRateBps,
     migrationCreditMinor,
@@ -155,6 +156,17 @@ export function calculateRebase(input: CalculationInput): RebaseCalculation {
 
   assertCalculationInvariants(result);
   return result;
+}
+
+function greatestCommonDivisor(left: bigint, right: bigint): bigint {
+  let a = left;
+  let b = right;
+  while (b !== 0n) {
+    const remainder = a % b;
+    a = b;
+    b = remainder;
+  }
+  return a === 0n ? 1n : a;
 }
 
 export function assertCalculationInvariants(calculation: RebaseCalculation): void {
