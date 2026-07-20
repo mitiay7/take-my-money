@@ -306,7 +306,13 @@ export function RebaseDemo() {
           <h1>Rebase a subscription.</h1>
           <p>Complete the provider-neutral migration in under two minutes.</p>
         </div>
-        <button className="button button-quiet" type="button" onClick={resetDemo} disabled={!!busy}>
+        <button
+          className="button button-quiet"
+          type="button"
+          onClick={resetDemo}
+          disabled={!!busy}
+          data-testid="presentation-reset"
+        >
           <RefreshCcw size={16} aria-hidden="true" /> Reset demo
         </button>
       </header>
@@ -374,7 +380,7 @@ export function RebaseDemo() {
                 ))}
               </div>
               {scenario && (
-                <div className="receipt-preview">
+                <div className="receipt-preview" data-testid="synthetic-receipt">
                   <Image
                     src={scenario.receiptImageUrl}
                     alt={`Synthetic demo receipt for ${scenario.title}`}
@@ -401,7 +407,7 @@ export function RebaseDemo() {
           )}
 
           {step === "VERIFY" && extraction && (
-            <div className="demo-panel">
+            <div className="demo-panel" data-testid="gpt-extraction">
               <PanelHeading
                 icon={<Bot />}
                 kicker="Unverified receipt details"
@@ -451,7 +457,7 @@ export function RebaseDemo() {
                 title="Choose the new direct plan"
                 copy="Provider data is now authoritative. All target prices remain illustrative."
               />
-              <div className="verified-strip">
+              <div className="verified-strip" data-testid="verified-subscription">
                 <BadgeCheck size={20} aria-hidden="true" />
                 <div>
                   <strong>{verification.source.planName}</strong>
@@ -468,6 +474,7 @@ export function RebaseDemo() {
                     role="radio"
                     aria-checked={targetPlanId === plan.id}
                     className={`plan-option ${targetPlanId === plan.id ? "selected" : ""}`}
+                    data-testid={plan.id === "direct-pro-monthly" ? "target-plan" : undefined}
                     key={plan.id}
                     onClick={() => setTargetPlanId(plan.id)}
                     disabled={plan.disabled || !!busy}
@@ -506,11 +513,11 @@ export function RebaseDemo() {
                   <span>Target plan</span>
                   <strong>{money(quote.targetPriceMinor, quote.currency)}</strong>
                 </div>
-                <div className="credit-value">
+                <div className="credit-value" data-testid="migration-credit">
                   <span>Migration credit</span>
                   <strong>−{money(quote.migrationCreditMinor, quote.currency)}</strong>
                 </div>
-                <div className="due-value">
+                <div className="due-value" data-testid="amount-due">
                   <span>Simulated due now</span>
                   <strong>{money(quote.amountDueMinor, quote.currency)}</strong>
                 </div>
@@ -524,7 +531,7 @@ export function RebaseDemo() {
                 </span>
               </div>
               {explanation ? (
-                <div className="explanation-card">
+                <div className="explanation-card" data-testid="gpt-explanation">
                   <div className="explanation-label">
                     <Sparkles size={15} aria-hidden="true" /> Explained from verified calculation
                     data · {explanationAi?.live ? explanationAi.model : "deterministic fallback"}
@@ -587,6 +594,7 @@ export function RebaseDemo() {
                 type="button"
                 onClick={confirm}
                 disabled={consents.some((value) => !value) || !!busy}
+                data-testid="confirm-rebase"
               >
                 Rebase and start the new plan <ArrowRight size={18} aria-hidden="true" />
               </button>
@@ -624,7 +632,10 @@ export function RebaseDemo() {
 
 function AiMode({ status, purpose }: { status: AiStatus; purpose: string }) {
   return (
-    <div className={`ai-mode ${status.live ? "live" : "fallback"}`}>
+    <div
+      className={`ai-mode ${status.live ? "live" : "fallback"}`}
+      data-testid={purpose === "Receipt extraction" ? "extraction-status" : "gpt-explanation"}
+    >
       <span aria-hidden="true" />
       <strong>{purpose}</strong>
       <b>{status.live ? `${status.model} live` : "Deterministic fallback"}</b>
@@ -700,7 +711,7 @@ function Timeline({ quote, source }: { quote: Quote; source: Verification["sourc
   const total = Number(quote.periodDurationMs);
   const usedPercentage = Math.max(0, Math.min(100, ((total - remaining) / total) * 100));
   return (
-    <div className="timeline-card">
+    <div className="timeline-card" data-testid="paid-period-timeline">
       <div
         className="timeline-track"
         role="img"
@@ -710,7 +721,7 @@ function Timeline({ quote, source }: { quote: Quote; source: Verification["sourc
         <span className="timeline-remaining" style={{ width: `${100 - usedPercentage}%` }} />
         <i style={{ left: `${usedPercentage}%` }} />
       </div>
-      <div className="timeline-dates">
+      <div className="timeline-dates" data-testid="unused-value">
         <span>
           <b>Started</b>
           {shortDate(source.periodStartUtc)}

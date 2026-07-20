@@ -121,6 +121,18 @@ pnpm build
 
 The Vitest suite uses real PostgreSQL for repository and saga integration tests and a mocked Responses client for AI tests. Playwright runs the full journey and blocked flow on desktop and 390 px-class mobile profiles, including Axe accessibility scans.
 
+## Automated demo video
+
+Place `01.mp3` through `08.mp3` in `demo/voiceover/`, then run:
+
+```bash
+pnpm demo:video
+```
+
+The command records the deployed application, synchronizes every scene from measured audio durations, mixes an original royalty-free ambient bed, renders a 1920×1080 H.264/AAC MP4, and validates the strict 2:40 contest limit. The output is `artifacts/video/take-my-money-demo.mp4`.
+
+See [Automated demo video](docs/AUTOMATED_DEMO_VIDEO.md).
+
 ## Demo scenarios
 
 | Scenario              | Expected decision                                 |

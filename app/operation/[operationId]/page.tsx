@@ -24,16 +24,18 @@ export default async function OperationPage({
   } catch {
     notFound();
   }
-  const complete = view.operation.status === "COMPLETED";
   const reconciliation = view.operation.status === "RECONCILIATION_REQUIRED";
 
   return (
-    <div className="result-page shell">
+    <div className="result-page shell" data-testid="success-screen">
       <div className={`result-icon ${reconciliation ? "waiting" : ""}`}>
         {reconciliation ? <Clock3 aria-hidden="true" /> : <CheckCircle2 aria-hidden="true" />}
       </div>
       <p className="kicker">{reconciliation ? "Safe pause" : "Migration complete"}</p>
       <h1>{reconciliation ? "Target result needs reconciliation." : "You are upgraded."}</h1>
+      <span className="operation-status-pill" data-testid="operation-status">
+        {view.operation.status}
+      </span>
       <p className="result-lede">
         {reconciliation
           ? "The target request may have succeeded, so the sandbox will look it up by the original idempotency key before changing any financial state."
@@ -42,6 +44,14 @@ export default async function OperationPage({
 
       {view.quote && (
         <div className="result-summary">
+          <div>
+            <span>Source paid period</span>
+            <strong>{money(view.quote.sourceValueMinor, view.quote.currency)}</strong>
+          </div>
+          <div>
+            <span>Target-plan price</span>
+            <strong>{money(view.quote.targetPriceMinor, view.quote.currency)}</strong>
+          </div>
           <div>
             <span>Migration credit</span>
             <strong>{money(view.quote.migrationCreditMinor, view.quote.currency)}</strong>
@@ -53,10 +63,6 @@ export default async function OperationPage({
           <div>
             <span>New plan</span>
             <strong>{view.targetPlan?.displayName ?? "Pending"}</strong>
-          </div>
-          <div>
-            <span>Next renewal</span>
-            <strong>{complete ? "August 19, 2026" : "Pending reconciliation"}</strong>
           </div>
         </div>
       )}

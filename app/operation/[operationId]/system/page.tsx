@@ -1,7 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
-import { ArrowLeft, Braces, Database, Fingerprint, GitCommitHorizontal } from "lucide-react";
+import {
+  ArrowLeft,
+  Braces,
+  Database,
+  Fingerprint,
+  GitCommitHorizontal,
+  RefreshCcw,
+} from "lucide-react";
 import { getSystemView } from "@/lib/application/operation-query";
 import { readSession } from "@/lib/auth/session";
 import { getDatabase } from "@/lib/db/client";
@@ -36,7 +43,7 @@ export default async function SystemPage({ params }: { params: Promise<{ operati
         and append-only credit entries. Secrets and full transaction identifiers are excluded.
       </p>
 
-      <div className="system-overview">
+      <div className="system-overview" data-testid="state-machine">
         <SystemStat icon={<GitCommitHorizontal />} label="State" value={view.operation.status} />
         <SystemStat
           icon={<Fingerprint />}
@@ -49,6 +56,11 @@ export default async function SystemPage({ params }: { params: Promise<{ operati
           value={view.quote?.algorithmVersion ?? "—"}
         />
         <SystemStat icon={<Database />} label="Ledger entries" value={String(view.ledger.length)} />
+        <SystemStat
+          icon={<RefreshCcw />}
+          label="Reconciliation"
+          value={view.technical.reconciliationStatus}
+        />
       </div>
 
       <section className="system-section">
@@ -70,10 +82,19 @@ export default async function SystemPage({ params }: { params: Promise<{ operati
           />
           <Tech label="Period start" value={view.source?.periodStart ?? "—"} mono />
           <Tech label="Period end" value={view.source?.periodEnd ?? "—"} mono />
+          <Tech
+            label="Source consumption"
+            value={view.source?.consumedAt ? "CONSUMED EXACTLY ONCE" : "AVAILABLE"}
+          />
+          <Tech
+            label="Idempotency key prefix"
+            value={`${view.technical.idempotencyKeyPrefix ?? "—"}…`}
+            mono
+          />
         </dl>
       </section>
 
-      <section className="system-section">
+      <section className="system-section" data-testid="deterministic-calculation">
         <div className="system-section-head">
           <span>02</span>
           <div>
@@ -103,7 +124,7 @@ export default async function SystemPage({ params }: { params: Promise<{ operati
         </dl>
       </section>
 
-      <section className="system-section">
+      <section className="system-section" data-testid="audit-trail">
         <div className="system-section-head">
           <span>03</span>
           <div>
@@ -129,7 +150,7 @@ export default async function SystemPage({ params }: { params: Promise<{ operati
         </ol>
       </section>
 
-      <section className="system-section">
+      <section className="system-section" data-testid="credit-ledger">
         <div className="system-section-head">
           <span>04</span>
           <div>
