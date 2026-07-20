@@ -15,6 +15,7 @@ export function renderVideo(options: { captions: boolean }): void {
   const duration = durationSeconds.toFixed(3);
   const trimStart = Math.max(0, recording.videoTrimStartMs / 1000).toFixed(3);
   const louderOutroStart = Math.max(0, durationSeconds - 4).toFixed(3);
+  const outroRampStart = Math.max(0, durationSeconds - 5).toFixed(3);
   const captionsFile = fromProjectRoot("demo/voiceover/captions.srt");
   if (options.captions && !existsSync(captionsFile)) {
     throw new Error("--captions was requested but demo/voiceover/captions.srt does not exist");
@@ -25,7 +26,7 @@ export function renderVideo(options: { captions: boolean }): void {
     : "";
   const filter = [
     `[0:v]trim=start=${trimStart},setpts=PTS-STARTPTS,tpad=stop_mode=clone:stop_duration=2,trim=duration=${duration},fps=30,scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2,format=yuv420p${subtitleFilter}[video]`,
-    `[2:a]volume='if(lt(t,4),1.15,if(gt(t,${louderOutroStart}),1.15,0.45))':eval=frame[music-level]`,
+    `[2:a]volume='if(lt(t,4),0.58,if(lt(t,5),0.58-(t-4)*0.43,if(lt(t,${outroRampStart}),0.15,if(lt(t,${louderOutroStart}),0.15+(t-${outroRampStart})*0.43,0.58))))':eval=frame[music-level]`,
     `[music-level][1:a]sidechaincompress=threshold=0.018:ratio=6:attack=25:release=450[ducked-music]`,
     `[1:a][ducked-music]amix=inputs=2:weights='1 1':normalize=0,alimiter=limit=0.95,atrim=duration=${duration}[audio]`,
   ].join(";");

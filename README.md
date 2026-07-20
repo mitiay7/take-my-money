@@ -129,7 +129,7 @@ Place `01.mp3` through `08.mp3` in `demo/voiceover/`, then run:
 pnpm demo:video
 ```
 
-The command records the deployed application, synchronizes every scene from measured audio durations, mixes an original royalty-free ambient bed, renders a 1920×1080 H.264/AAC MP4, and validates the strict 2:40 contest limit. The output is `artifacts/video/take-my-money-demo.mp4`.
+The command records the deployed application, synchronizes every scene from measured audio durations, mixes the verified CC0 track **One Cool Minute**, renders a 1920×1080 H.264/AAC MP4, and validates the project's strict 2:40 safety limit. The output is `artifacts/video/take-my-money-demo.mp4`.
 
 See [Automated demo video](docs/AUTOMATED_DEMO_VIDEO.md).
 

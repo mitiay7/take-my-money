@@ -8,6 +8,7 @@ export const artifactDir = resolve(projectRoot, "artifacts/video");
 export const debugDir = resolve(artifactDir, "debug");
 export const rawVideoDir = resolve(artifactDir, "raw");
 export const normalizedAudioDir = resolve(artifactDir, "audio-normalized");
+export const backgroundMusicSource = resolve(projectRoot, "demo/music/one-cool-minute.mp3");
 
 export const artifactPaths = {
   audioInspection: resolve(artifactDir, "audio-inspection.json"),
@@ -16,7 +17,7 @@ export const artifactPaths = {
   recordingReport: resolve(artifactDir, "recording-report.json"),
   browserVideo: resolve(artifactDir, "browser-demo.webm"),
   assembledVoiceover: resolve(artifactDir, "assembled-voiceover.wav"),
-  backgroundMusic: resolve(artifactDir, "original-background.wav"),
+  backgroundMusic: resolve(artifactDir, "background-music.wav"),
   finalVideo: resolve(artifactDir, "take-my-money-demo.mp4"),
   validation: resolve(artifactDir, "validation.json"),
   trace: resolve(debugDir, "trace.zip"),

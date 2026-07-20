@@ -1,4 +1,4 @@
-import { mkdtempSync, writeFileSync } from "node:fs";
+import { existsSync, mkdtempSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, expect, test } from "vitest";
@@ -6,8 +6,17 @@ import { calculateTimeline } from "@/scripts/demo/build-timeline";
 import { expectedAudioFileNames } from "@/scripts/demo/demo-scenes";
 import { inspectAudioPath, validateAudioFileNames } from "@/scripts/demo/inspect-audio";
 import type { AudioInspection } from "@/scripts/demo/demo-types";
+import { backgroundMusicSource } from "@/scripts/demo/demo-files";
 
 describe("automated demo video", () => {
+  test("includes the licensed CC0 background track", () => {
+    expect(existsSync(backgroundMusicSource)).toBe(true);
+    const probe = inspectAudioPath(backgroundMusicSource, "demo/music/one-cool-minute.mp3", 0);
+    expect(probe.codec).toBe("mp3");
+    expect(probe.durationSeconds).toBeGreaterThan(190);
+    expect(probe.channels).toBe(2);
+  });
+
   test("uses the eight authoritative narration files in numeric order", () => {
     expect(expectedAudioFileNames).toEqual([
       "01.mp3",

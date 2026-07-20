@@ -42,3 +42,6 @@
 - The production release passed all 57 Vitest checks, all 8 desktop/mobile Playwright checks, Axe scans, a clean visual browser pass, and GitHub Actions.
 - Public demo: https://take-my-money-psi.vercel.app
 - Live GPT-5.6 activation remains a deployer-owned release step because no `OPENAI_API_KEY` was available; production exposes the explicit deterministic fallback until that server-side secret is configured.
+- Added a deterministic production-video pipeline driven by the eight supplied narration clips: measured timeline, production Playwright capture, narration assembly, FFmpeg render, and codec/state validation.
+- Replaced the synthetic sound bed with “One Cool Minute” by Loyalty Freak Music, verified by SHA-256 and used under CC0 1.0. The mix ducks under speech and rises smoothly for the opening and closing four seconds.
+- Final demo validation: 159.014 seconds, 1920×1080, 30 fps, H.264/AAC. The updated suite passes 63 Vitest checks and 12 desktop/mobile Playwright checks.

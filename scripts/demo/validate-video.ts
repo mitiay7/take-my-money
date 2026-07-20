@@ -1,5 +1,10 @@
 import { existsSync, readFileSync, statSync, writeFileSync } from "node:fs";
-import { artifactPaths, ensureArtifactDirectories, runBinary } from "./demo-files";
+import {
+  artifactPaths,
+  backgroundMusicSource,
+  ensureArtifactDirectories,
+  runBinary,
+} from "./demo-files";
 import { competitionLimitMs, expectedAudioFileNames } from "./demo-scenes";
 import type { DemoTimeline } from "./demo-types";
 
@@ -57,7 +62,8 @@ export function validateVideo(): Record<string, unknown> {
     allScenesRecorded: recording.scenesCompleted.length === timeline.scenes.length,
     finalStateReached: recording.finalStateReached,
     endingCardShown: recording.endingCardShown,
-    originalBackgroundMusic: existsSync(artifactPaths.backgroundMusic),
+    licensedBackgroundMusicSource: existsSync(backgroundMusicSource),
+    preparedBackgroundMusic: existsSync(artifactPaths.backgroundMusic),
   };
   const validation = {
     valid: Object.values(checks).every(Boolean),

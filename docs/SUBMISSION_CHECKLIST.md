@@ -27,7 +27,8 @@
 - [x] Codex build log and final `/feedback` placeholder.
 - [x] Final desktop and mobile screenshots committed.
 - [x] Public demo URL added to README and submission copy.
-- [ ] Demo video recorded and uploaded.
+- [x] Demo video recorded and validated locally at 159.014 seconds.
+- [ ] Demo video uploaded publicly to YouTube.
 
 ## Release
 
