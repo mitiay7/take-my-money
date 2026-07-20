@@ -3,6 +3,7 @@ import { sql } from "drizzle-orm";
 import { afterAll, beforeEach, describe, expect, it } from "vitest";
 import { targetPlans } from "@/db/schema";
 import { closeDatabaseForTests, getDatabase } from "@/lib/db/client";
+import { AiInteractionRepository } from "@/lib/repositories/ai-interaction-repository";
 import { AuditRepository } from "@/lib/repositories/audit-repository";
 import { IdempotencyRepository } from "@/lib/repositories/idempotency-repository";
 import { LedgerRepository } from "@/lib/repositories/ledger-repository";
@@ -197,5 +198,58 @@ describe("PostgreSQL repositories", () => {
     expect(
       await idempotency.find(session.id, recordInput.endpointScope, recordInput.idempotencyKeyHash),
     ).toMatchObject({ status: "COMPLETED", httpStatus: 200 });
+  });
+
+  it("enforces per-session AI concurrency and hourly limits with database locks", async () => {
+    const { session, operation } = await createFixture();
+    const interactions = new AiInteractionRepository(database);
+    const start = (inputHash: string, hourlyLimit = 20) =>
+      interactions.tryStart({
+        demoSessionId: session.id,
+        operationId: operation.id,
+        purpose: "RECEIPT_EXTRACTION",
+        model: "gpt-5.6",
+        inputHash,
+        outputSchemaVersion: "1.0",
+        hourlyLimit,
+      });
+
+    const active = await Promise.all([start("one"), start("two"), start("three")]);
+    expect(active.every(Boolean)).toBe(true);
+    expect(await start("four")).toBeNull();
+
+    await interactions.finish(active[0]!.id, { status: "LIVE", latencyMs: 25 });
+    expect(await start("five")).not.toBeNull();
+
+    const otherSession = await new SessionRepository(database).create();
+    const otherOperation = await new OperationRepository(database).create({
+      demoSessionId: otherSession.id,
+      scenarioId: "active-normal",
+      status: "DRAFT",
+      evaluationTime: "2026-07-19T00:00:00.000Z",
+    });
+    const separate = new AiInteractionRepository(database);
+    const firstOther = await separate.tryStart({
+      demoSessionId: otherSession.id,
+      operationId: otherOperation.id,
+      purpose: "RECEIPT_EXTRACTION",
+      model: "gpt-5.6",
+      inputHash: "independent",
+      outputSchemaVersion: "1.0",
+      hourlyLimit: 1,
+    });
+    expect(firstOther).not.toBeNull();
+    await separate.finish(firstOther!.id, { status: "LIVE", latencyMs: 20 });
+    expect(
+      await separate.tryStart({
+        demoSessionId: otherSession.id,
+        operationId: otherOperation.id,
+        purpose: "RECEIPT_EXTRACTION",
+        model: "gpt-5.6",
+        inputHash: "hourly-second",
+        outputSchemaVersion: "1.0",
+        hourlyLimit: 1,
+      }),
+    ).toBeNull();
   });
 });

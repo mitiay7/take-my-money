@@ -1079,6 +1079,45 @@ button {
   font-size: 13px;
 }
 
+.ai-mode {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: -0.35rem 0 1.25rem;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 0.65rem;
+  background: var(--white);
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.ai-mode > span {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: #d88729;
+}
+
+.ai-mode.live > span {
+  background: var(--mint-dark);
+  box-shadow: 0 0 0 0.22rem color-mix(in srgb, var(--mint-dark) 15%, transparent);
+}
+
+.ai-mode strong {
+  color: var(--ink);
+}
+
+.ai-mode b {
+  margin-left: auto;
+  color: var(--mint-dark);
+}
+
+.ai-mode code {
+  color: var(--muted);
+  font-size: 0.65rem;
+}
+
 .alert-error {
   border: 1px solid #e2a69f;
   background: #fff0ec;

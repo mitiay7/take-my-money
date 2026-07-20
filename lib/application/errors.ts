@@ -17,7 +17,8 @@ export class ApplicationError extends Error {
       | "TARGET_CREATION_FAILED"
       | "RECONCILIATION_REQUIRED"
       | "RECONCILIATION_NOT_READY"
-      | "CONCURRENT_STATE_CHANGE",
+      | "CONCURRENT_STATE_CHANGE"
+      | "AI_RATE_LIMITED",
     message: string,
     readonly httpStatus: number,
     readonly retryable = false,

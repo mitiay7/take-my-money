@@ -77,6 +77,8 @@ type Explanation = {
   riskExplanation: string;
 };
 
+type AiStatus = { live: boolean; model: string; fallbackCode: string | null };
+
 type DemoStep = "RECEIPT" | "VERIFY" | "PLAN" | "REVIEW" | "CONFIRM";
 
 const steps: { id: DemoStep; label: string }[] = [
@@ -118,10 +120,12 @@ export function RebaseDemo() {
   const [operationId, setOperationId] = useState<string | null>(null);
   const [step, setStep] = useState<DemoStep>("RECEIPT");
   const [extraction, setExtraction] = useState<Extraction | null>(null);
+  const [receiptAi, setReceiptAi] = useState<AiStatus | null>(null);
   const [verification, setVerification] = useState<Verification | null>(null);
   const [targetPlanId, setTargetPlanId] = useState("direct-pro-monthly");
   const [quote, setQuote] = useState<Quote | null>(null);
   const [explanation, setExplanation] = useState<Explanation | null>(null);
+  const [explanationAi, setExplanationAi] = useState<AiStatus | null>(null);
   const [consents, setConsents] = useState([false, false, false]);
   const [busy, setBusy] = useState<string | null>("Initializing demo");
   const [error, setError] = useState<string | null>(null);
@@ -182,12 +186,16 @@ export function RebaseDemo() {
         scenarioId: scenario.id,
       });
       setOperationId(created.operation.publicId);
-      const result = await mutate<{ extraction: Extraction }>("/api/ai/extract-receipt", {
-        operationId: created.operation.publicId,
-        scenarioId: scenario.id,
-        receiptAssetId: scenario.receiptAssetId,
-      });
+      const result = await mutate<{ extraction: Extraction } & AiStatus>(
+        "/api/ai/extract-receipt",
+        {
+          operationId: created.operation.publicId,
+          scenarioId: scenario.id,
+          receiptAssetId: scenario.receiptAssetId,
+        },
+      );
       setExtraction(result.extraction);
+      setReceiptAi({ live: result.live, model: result.model, fallbackCode: result.fallbackCode });
       setStep("VERIFY");
     } catch (caught) {
       setError(messageFrom(caught));
@@ -224,10 +232,15 @@ export function RebaseDemo() {
       });
       setQuote(result.quote);
       setStep("REVIEW");
-      const explained = await mutate<{ explanation: Explanation }>("/api/ai/explain", {
+      const explained = await mutate<{ explanation: Explanation } & AiStatus>("/api/ai/explain", {
         operationId,
       });
       setExplanation(explained.explanation);
+      setExplanationAi({
+        live: explained.live,
+        model: explained.model,
+        fallbackCode: explained.fallbackCode,
+      });
     } catch (caught) {
       setError(messageFrom(caught));
     } finally {
@@ -267,9 +280,11 @@ export function RebaseDemo() {
       setOperationId(null);
       setStep("RECEIPT");
       setExtraction(null);
+      setReceiptAi(null);
       setVerification(null);
       setQuote(null);
       setExplanation(null);
+      setExplanationAi(null);
       setConsents([false, false, false]);
     } catch (caught) {
       setError(messageFrom(caught));
@@ -335,6 +350,7 @@ export function RebaseDemo() {
                 title="Choose synthetic source evidence"
                 copy="Built-in receipt images are safe demo fixtures. Arbitrary uploads are disabled."
               />
+              {receiptAi && <AiMode status={receiptAi} purpose="Receipt extraction" />}
               <div
                 className="scenario-grid"
                 role="radiogroup"
@@ -511,7 +527,7 @@ export function RebaseDemo() {
                 <div className="explanation-card">
                   <div className="explanation-label">
                     <Sparkles size={15} aria-hidden="true" /> Explained from verified calculation
-                    data
+                    data · {explanationAi?.live ? explanationAi.model : "deterministic fallback"}
                   </div>
                   <h3>{explanation.headline}</h3>
                   <p>{explanation.summary}</p>
@@ -602,6 +618,17 @@ export function RebaseDemo() {
           <p className="summary-disclaimer">Illustrative prices · no payment performed</p>
         </aside>
       </div>
+    </div>
+  );
+}
+
+function AiMode({ status, purpose }: { status: AiStatus; purpose: string }) {
+  return (
+    <div className={`ai-mode ${status.live ? "live" : "fallback"}`}>
+      <span aria-hidden="true" />
+      <strong>{purpose}</strong>
+      <b>{status.live ? `${status.model} live` : "Deterministic fallback"}</b>
+      {!status.live && status.fallbackCode && <code>{status.fallbackCode}</code>}
     </div>
   );
 }

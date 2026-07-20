@@ -303,3 +303,4 @@ export type RebaseQuoteRow = typeof rebaseQuotes.$inferSelect;
 export type LedgerEntryRow = typeof creditLedgerEntries.$inferSelect;
 export type AuditEventRow = typeof auditEvents.$inferSelect;
 export type IdempotencyRecordRow = typeof idempotencyRecords.$inferSelect;
+export type AiInteractionRow = typeof aiInteractions.$inferSelect;

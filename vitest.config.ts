@@ -16,6 +16,7 @@ export default defineConfig({
       "@take-my-money/provider-contracts": fileURLToPath(
         new URL("./packages/provider-contracts/src/index.ts", import.meta.url),
       ),
+      "server-only": fileURLToPath(new URL("./tests/server-only.ts", import.meta.url)),
     },
   },
   test: {

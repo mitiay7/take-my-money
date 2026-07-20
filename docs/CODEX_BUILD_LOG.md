@@ -34,3 +34,5 @@
 - Milestone 4 completed: signed anonymous sessions, CSRF-protected JSON API, receipt-to-result consumer flow, blocked/manual decisions, consent, result sharing, and sanitized technical audit.
 - Parallel desktop/mobile E2E exposed an invalid global unique constraint on deterministic quote fingerprints; fingerprints are now indexed but may repeat across independent operations.
 - Axe found invalid description-list markup in the technical view; corrected the semantic containers and verified the complete flow at desktop and mobile widths.
+- Milestone 5 completed: GPT-5.6 Responses API vision extraction, Zod Structured Outputs, grounded quote explanations, hashed safety identifiers, no-store requests, bounded retry/timeout, database-enforced usage limits, and honest deterministic fallback states.
+- Mocked Responses tests verify base64 image input, structured-output configuration, usage capture, and rejection of invented financial values. Pure grounding tests reject unsupported amounts, durations, percentages, and lookup references.
